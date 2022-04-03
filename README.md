@@ -7,7 +7,8 @@ Manage your save files from games on google drive folders more easily
 
 ## TO DO'S
 
-- [ ] Save the user configs on a json or something similar to make this process simpler.
+- [x] Save the user configs on a json or something similar to make this process simpler.
+- [ ] Use the json file so the user wont need to select the game folder everytime the application is open
 - [ ] Watch the game save folder for changes on the files so that it will automatically upload to the cloud.
 - [ ] Find a way to upload to different services, not just google drive.
 - [ ] Use a backup folder on the cloud for each so that if errors occur it doesn't ruin the player save files.

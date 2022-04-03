@@ -1,7 +1,7 @@
 from pickle import NONE
 import PySimpleGUI as sg    
-
-
+from json_in_file import *
+from configs import *
 # find a way to always give him permission
 # Show the user, the options for him to log into Google
 # close the screen and show a screen for him to wait til the login is over
@@ -17,7 +17,8 @@ input_screen_layout = [
                 [sg.Text('Selecione o local de save do jogo: ')],
                 #verify if the folder exist
                 [sg.Input(key = '-FOLDER-LOCATION-'), sg.FolderBrowse()],     
-                [sg.Button("Submit"), sg.Button("Cancel")]]      
+                [sg.Button("Submit"), sg.Button("Cancel")],
+                [sg.Button("Save as JSON"),]]      
 
 google_drive_login_window = sg.Window('Google Drive', google_drive_login_layout) 
 
@@ -34,8 +35,12 @@ while True:
     if event == "Cancel":
         sg.Window.close(self=input_screen_window)
         break
-    if event == sg.WIN_CLOSED or event=="Cancel":
+    if event == sg.WIN_CLOSED:
         break
+    if event == "Save as JSON" and values['-GOOGLE-DRIVE-LINK-'] != "" and values['-FOLDER-LOCATION-'] != "":
+        configurations = Configs(values['-FOLDER-LOCATION-'],values['-GOOGLE-DRIVE-LINK-'])
+        save_configurations(configurations)
+        sg.popup('saved successfully')
     elif event == "Submit":
         if(values['-GOOGLE-DRIVE-LINK-'] == ""):
             sg.popup('there is no google drive link, try again')
