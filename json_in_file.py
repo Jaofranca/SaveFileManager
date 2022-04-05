@@ -11,5 +11,9 @@ def save_configurations(configs):
     with open("configs.json", "w") as outfile:
         outfile.write(json_object)
 
-def read_json(json):
-    print()
+def read_json():
+
+    file = open('configs.json','r')
+    deserialized_json = json.loads(file.read())
+    user_configs = Configs(deserialized_json['gameFolder'],deserialized_json['googleDriveFolder'])
+    return user_configs
