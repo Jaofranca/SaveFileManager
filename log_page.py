@@ -3,22 +3,19 @@ import os
 from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QTextEdit, QComboBox, QFileDialog,
                             QHBoxLayout, QVBoxLayout)
 
-class MyApp(QWidget):
+from main import MyApp
+
+class LogPage(QWidget):
     def __init__(self):
         super().__init__()
         self.window_width, self.window_height = 400, 200
-        self.setWindowTitle("SaveFileManager")
+        self.setWindowTitle("Log_Page")
         self.setMinimumSize(self.window_width, self.window_height)
 
 
         layout = QVBoxLayout()
         self.setLayout(layout)
 
-        self.options = ('getExistingDirectory()', )
-
-        # self.combo = QComboBox()
-        # self.combo.addItems(self.options)
-        # layout.addWidget(self.combo)
 
         btn = QPushButton('Escolher diretório')
         btn.setStyleSheet('''
@@ -67,29 +64,6 @@ class MyApp(QWidget):
         btn.clicked.connect(self.launchDialog)
         layout.addWidget(btn)
 
-
-    def launchDialog(self):
-            response = self.getDirectory()
-
-
-    def getFileName(self):
-        file_filter = 'Data File (*.xlsx *.csv *.dat);; Excel File (*.xlsx *.xls);; Image File (*.png *.jpg)'
-        response = QFileDialog.getOpenFileUrl(
-            parent=self,
-            caption='Select a file',
-            directory=os.getcwd(),
-            filter=file_filter,
-            initialFilter='Excel File (*.xlsx *.xls)'
-        )
-        self.textbox.setText(str(response))
-
-    def getDirectory(self):
-         response = QFileDialog.getExistingDirectory(
-             self,
-             caption= "Escolha a pasta onde está o save do jogo"
-             # caption='Select a folder'
-         )
-         self.textbox.setText(str(response))
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
